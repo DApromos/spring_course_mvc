@@ -1,25 +1,33 @@
 package com.dmytroabramovskyi.spring.mvc;
 
+import javax.validation.constraints.*;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Employee {
+
+    @Size(min = 2, max = 50, message = "name must be min 2 symbols")
     private String name;
+//    @NotEmpty(message = "surname is required field")
+
+    @NotBlank(message = "surname is required")
     private String surname;
+
+    @Min(value = 1000, message = "must be greater than 999")
+    @Max(value = 5000, message = "must be less than 5001")
     private int salary;
+
     private String department;
     private Map<String, String> departments;
     private String carBrand;
-
-    public Map<String, String> getCarBrands() {
-        return carBrands;
-    }
-
-    public void setCarBrands(Map<String, String> carBrands) {
-        this.carBrands = carBrands;
-    }
-
     private Map<String, String> carBrands;
+    private String[] languages;
+    private Map<String, String> languageList;
+
+    @Pattern(regexp = "\\d{3}-\\d{2}-\\d{2}", message = "please use pattern XXX-XX-XX")
+    private String phoneNumber;
+
+    private String email;
 
 
     public Employee() {
@@ -27,10 +35,17 @@ public class Employee {
         departments.put("Information Technology", "IT");
         departments.put("Human Resources", "HR");
         departments.put("Sales", "Sales");
+
         carBrands = new HashMap<>();
         carBrands.put("BMW", "BMW");
         carBrands.put("Audi", "Audi");
         carBrands.put("Mercedes-Benz", "MB");
+
+        languageList = new HashMap<>();
+        languageList.put("English", "EN");
+        languageList.put("Deutch", "DE");
+        languageList.put("French", "FR");
+
     }
 
     public String getName() {
@@ -80,6 +95,48 @@ public class Employee {
 
     public void setCarBrand(String carBrand) {
         this.carBrand = carBrand;
+    }
+
+    public Map<String, String> getLanguageList() {
+        return languageList;
+    }
+
+    public void setLanguageList(Map<String, String> languageList) {
+        this.languageList = languageList;
+    }
+
+    public String[] getLanguages() {
+        return languages;
+    }
+
+    public void setLanguages(String[] languages) {
+        this.languages = languages;
+    }
+
+    public Map<String, String> getCarBrands() {
+        return carBrands;
+    }
+
+    public void setCarBrands(Map<String, String> carBrands) {
+        this.carBrands = carBrands;
+    }
+
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
